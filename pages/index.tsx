@@ -1,8 +1,9 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 
-import Header from "../components/Header";
-import Top from "../components/Top";
+import Header from "../components/landing/Header";
+import Promos from "../components/landing/Promos";
+import Top from "../components/landing/Top";
 
 const Home: NextPage = () => {
   return (
@@ -16,9 +17,17 @@ const Home: NextPage = () => {
         <div className="relative h-[200vh] bg-[#e7ecee]">
           <Top />
         </div>
+        <Promos />
       </main>
     </div>
   );
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  // const categories = await fetchCategories()
+  return {
+    props: {},
+  };
+};
