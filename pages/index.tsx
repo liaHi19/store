@@ -4,8 +4,15 @@ import Head from "next/head";
 import Header from "../components/landing/Header";
 import Promos from "../components/landing/Promos";
 import Top from "../components/landing/Top";
+import { fetchCategories } from "../helpers/fetchCategories";
 
-const Home: NextPage = () => {
+type HomeProps = {
+  categories: ICategory[];
+};
+
+const Home: NextPage<HomeProps> = ({ categories }) => {
+  console.log(categories);
+
   return (
     <div>
       <Head>
@@ -17,7 +24,7 @@ const Home: NextPage = () => {
         <div className="relative h-[200vh] bg-[#e7ecee]">
           <Top />
         </div>
-        <Promos />
+        <Promos categories={categories} />
       </main>
     </div>
   );
@@ -25,9 +32,9 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  // const categories = await fetchCategories()
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+  const categories = await fetchCategories();
   return {
-    props: {},
+    props: { categories },
   };
 };
