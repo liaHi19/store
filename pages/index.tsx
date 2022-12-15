@@ -5,14 +5,14 @@ import Header from "../components/landing/Header";
 import Promos from "../components/landing/Promos";
 import Top from "../components/landing/Top";
 import { fetchCategories } from "../helpers/fetchCategories";
+import { fetchProducts } from "../helpers/fetchProducts";
 
 type HomeProps = {
   categories: ICategory[];
+  products: IProduct[];
 };
 
-const Home: NextPage<HomeProps> = ({ categories }) => {
-  console.log(categories);
-
+const Home: NextPage<HomeProps> = ({ categories, products }) => {
   return (
     <div>
       <Head>
@@ -24,7 +24,7 @@ const Home: NextPage<HomeProps> = ({ categories }) => {
         <div className="relative h-[200vh] bg-[#e7ecee]">
           <Top />
         </div>
-        <Promos categories={categories} />
+        <Promos categories={categories} products={products} />
       </main>
     </div>
   );
@@ -34,7 +34,8 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
   const categories = await fetchCategories();
+  const products = await fetchProducts();
   return {
-    props: { categories },
+    props: { categories, products },
   };
 };
