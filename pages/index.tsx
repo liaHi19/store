@@ -1,7 +1,6 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 
-import Header from "../components/landing/Header";
 import Promos from "../components/landing/Promos";
 import Top from "../components/landing/Top";
 import { fetchCategories } from "../helpers/fetchCategories";
@@ -19,13 +18,11 @@ const Home: NextPage<HomeProps> = ({ categories, products }) => {
         <title>Store App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
-      <main>
-        <div className="relative h-[200vh] bg-[#e7ecee]">
-          <Top />
-        </div>
-        <Promos categories={categories} products={products} />
-      </main>
+
+      <div className="relative h-[200vh] bg-[#e7ecee]">
+        <Top />
+      </div>
+      <Promos categories={categories} products={products} />
     </div>
   );
 };
